@@ -16,7 +16,7 @@ def currency_df(league):
     '''
     
     # Setting up the league's folder path
-    path = f'./leagues/{league}/'
+    path = f'../leagues/{league}/'
 
     for file in os.listdir(path):
         if 'Hardcore' in file:
@@ -78,7 +78,7 @@ def mirror_df(currency_df):
 
 
 # Code
-league_path = './leagues/'
+league_path = '../leagues/'
 leagues = [d for d in os.listdir(league_path)]
 
 df, df2 = currency_df(leagues[0])
@@ -104,7 +104,7 @@ del df
 del df2
 
 # Path of data folder
-path = f'./data/leagues/'
+path = f'../data/leagues/'
 
 for league in leagues:
 
@@ -138,7 +138,7 @@ for league in leagues:
     perm_league_mirror = pd.concat([perm_league_mirror, league_mirror])
 
 # Saving Dataframes as parquet files
-path = f'./data/'
+path = f'../data/'
 
 standard_dir = os.path.join(path, 'standard')
 os.makedirs(standard_dir, exist_ok=True)  # create directory if it does not exist
