@@ -9,6 +9,10 @@ def league_df(league='standard', currency='all'):
     the user at the time. It takes in which league the use wants to 
     work with and what currency they want to work with as arguements to
     retrieve the correct dataframe.
+
+    league: Default 'standard', but can also put in a challenge league.
+
+    currency: Default 'all', but can put in a specific currency instead.
     '''
 
     path = '../data/'
@@ -23,27 +27,49 @@ def league_df(league='standard', currency='all'):
         df1 = df[df['Get'] == currency].copy()
         df2 = df[df['Pay'] == currency].copy()
         df = pd.concat([df1, df2])
-    
+
     return df
     
-def trade_ratio(df):
+def trade_ratio(df, average=False):
     '''
     This function takes a raw df and produces new columns in the dataframe
     for the ratio of trade between the two currencies.
+
+    df: dataframe being transformed.
     '''
 
-    df['Ratio Label'] = np.nan
     df['Ratio'] = np.nan
 
-    df['Ratio Label'] = df.apply(lambda row: row['Get'][0] + '-' + row['Pay'][0], axis=1)
     df['Ratio'] = np.where(df['Get'] == 'Chaos Orb', 1/df['Value'], df['Value'])
+
+    if average:
+        df = average_ratio(df)
 
     return df
 
-def day_count(df):
+def average_ratio(df):
+    '''
+    This function takes the 2 different ratios that are gotten from the
+    trade_ratio function and returns an average trade ratio between the two.
+
+    This function is only for dataframes that only contain rows of observations
+    between chaos orbs and one other currency. It should not be used on a dataframe
+    with multiple different currencies.
+
+    df: dataframe being transformed.
+    '''
+
+    df = df.groupby('Date', as_index=False).agg({'Ratio': 'mean'})
+
+    return df
+    
+
+def league_day(df):
     '''
     This function takes the df and gives it a day column that counts the
     numerical day of the league.
+
+    df: dataframe being transformed.
     '''
 
     unique_dates = sorted(set(df['Date']))
@@ -53,3 +79,4 @@ def day_count(df):
     df['Day'] = df['Date'].map(day_count_dict)
 
     return df
+
