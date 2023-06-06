@@ -13,32 +13,19 @@ def league_df(league='standard', currency='all'):
 
     path = '../data/'
 
-    if (league != 'standard') & (league != 'compiled'):
-        if currency != 'all':
-            df = pd.read_parquet(os.path.join(path, f'leagues/{league}/{league}_{currency}.parquet'))
-        else:
-            df = pd.read_parquet(os.path.join(path, f'leagues/{league}/{league}.parquet'))
-    
-        return df
-
-    path = os.path.join(path, f'{league}')
-
-    if league == 'compiled':
-        if currency != 'all':
-            df = pd.read_parquet(os.path.join(path, f'league_{currency}.parquet'))
-        else:
-            df = pd.read_parquet(os.path.join(path, f'league.parquet'))
-    
-        return df
-    
     if league == 'standard':
-        if currency != 'all':
-            df = pd.read_parquet(os.path.join(path, f'standard_{currency}.parquet'))
-        else:
-            df = pd.read_parquet(os.path.join(path, f'standard.parquet'))
-    
-        return df
+        df = pd.read_parquet(os.path.join(path, 'standard.parquet'))
+    else:
+        df = pd.read_parquet(os.path.join(path, 'league.parquet'))
+        df = df[df['League'] == league].copy()
 
+    if currency != 'all':
+        df1 = df[df['Get'] == currency].copy()
+        df2 = df[df['Pay'] == currency].copy()
+        df = pd.concat([df1, df2])
+    
+    return df
+    
 def trade_ratio(df):
     '''
     This function takes a raw df and produces new columns in the dataframe
