@@ -12,9 +12,9 @@ Another important aspect to understand the economies of PoE is leagues. The play
 Finally this project will focus on the specific currencies dropped by the Conquerors, a set of end game bosses that all have a unique currency orb attached to them. These currencies can only be dropped by them. We evaluate their values by looking at their trade ratios witht the `Chaos Orb`, the currency orb that has become the *defaulted* currency for transactions and market discussion. The value of everything is always compared to it's current relationship with `Chaos Orbs`. **DISCLAIMER** The `Chaos Orb` is a currency just like everything else and is affected by various factors just like every other currency in the game, like drop rates, current popular crafting methods, and other game factors. It is not a stablely valued currency, but everthing in the economy revolves around the relation is has with everything else. 
 
 ### Additional Information
-[Leagues](https://www.poewiki.net/wiki/League#Challenge_leagues)
-[Currency](https://www.poewiki.net/wiki/Currency)
-[Conquerors](https://www.poewiki.net/wiki/Conquerors)
+[Leagues](https://www.poewiki.net/wiki/League#Challenge_leagues)  
+[Currency](https://www.poewiki.net/wiki/Currency)  
+[Conquerors](https://www.poewiki.net/wiki/Conquerors)  
 
 ## Problem Statement
 How well can we predict the last 10 days of a leaugue. By predicting the last few days of a league, players can use that information to inform their trading/investing decisions before the end of a league as they prepare for the items to be transfered over to the standard league.
